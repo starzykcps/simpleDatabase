@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -42,6 +42,28 @@
 
     <script type="module">
 
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBV4PN42L-tw4PzFngkmYYfVSraVKxvhOw",
+    authDomain: "crudapp-5b09c.firebaseapp.com",
+    projectId: "crudapp-5b09c",
+    storageBucket: "crudapp-5b09c.firebasestorage.app",
+    messagingSenderId: "318951546707",
+    appId: "1:318951546707:web:81344e053f47536dfa8ba6",
+    measurementId: "G-7R730MNBQ7"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
         //THIS IS WHERE YOU PASTE THE CODE TO CONNECT TO YOUR OWN DATABASE
         //Copy and paste the CDN bit of code from your app that you created on Firebase.
         //The script tag above is already there, so careful not to have duplicate script tags.
@@ -49,7 +71,8 @@
    
 
         import {getDatabase, ref, get, set, child, update, remove}
-        from //Copy and Paste the URL from near the top of the CDN you pasted in from firebase
+        from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js"
+        //Copy and Paste the URL from near the top of the CDN you pasted in from firebase
         // (the one where you imported "initializeApp" from),
         //but change "firebase-app" to "firebase-database"
         
@@ -82,6 +105,22 @@
                 alert(error);
             });
         }
+
+function InsertDog() {
+            set(ref(db, "Dogs/"+ enterID.value),{
+                Name: enterName.value,
+                ID: enterID.value,
+                Age: enterAge.value
+            })
+            .then(()=>{
+                alert("Data added successfully");
+            })
+            .catch((error)=>{
+                alert(error);
+            });
+        }
+
+
 
         function FindData() {
             const dbref = ref(db);
@@ -125,6 +164,7 @@
         }
 
         insertBtn.addEventListener('click', InsertData);
+          insertBtn.addEventListener('click', InsertDog);
         updateBtn.addEventListener('click', UpdateData);
         removeBtn.addEventListener('click', RemoveData);
         findBtn.addEventListener('click', FindData);
